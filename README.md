@@ -66,18 +66,6 @@ Provision local environment profiles: Set up target ports and environment variab
 Testing is streamlined directly through Swagger UI 
 (http://localhost:5050/swagger/index.html) using automated context settings (withCredentials = true) to handle session cookies seamlessly.
 
-Step,Target Endpoint,HTTP Verb,Operational Scenario,Expected System Response
-1,/health,GET,Telemetry System Integrity Assessment,200 OK with Healthy string payload. Validates SQL Server connectivity.
-2,/api/Auth/signup,POST,Onboard standard User and elevated Admin test profiles.,200 OK confirming structural data persistency.
-3,/api/Resource/shared-feed,GET,Attempt access as an anonymous request.,401 Unauthorized. Pipeline block confirms security guardrails are active.
-4,/api/Auth/login,POST,Authenticate using standard User credentials.,200 OK. Server issues cryptographically isolated cookie to browser.
-5,/api/Resource/shared-feed,GET,Access authorized profile assets with active session.,200 OK. Data stream unlocks successfully.
-6,/api/Admin/dashboard,GET,Access administrative assets using standard user session.,403 Forbidden. RBAC engine blocks access due to insufficient privileges.
-7,/api/Auth/logout,POST,Terminate active user credentials session.,200 OK. Sever-side map is purged; browser cookie container is wiped.
-8,/api/Auth/login,POST,Authenticate using elevated Admin credentials.,200 OK. Establishes new elevated session tracking scope.
-9,/api/Admin/dashboard,GET,Access restricted administrative dashboard data.,200 OK. RBAC permission rule grants full system access.
-
-
 🔄 Scheme Evolutions & Migration Safety Guide
 Entity Framework Core migrations work incrementally. When you modify your C# entities, the engine tracks differential changes instead of dropping your database.
 
